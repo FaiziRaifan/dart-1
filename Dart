@@ -1,0 +1,52 @@
+void main() {
+  const namaToko = 'Toko Metro';
+  final namaPelanggan = 'Ahmad';
+  bool isMember = true;
+  String? kodeVoucher;
+
+  List<String> namaBarang = ['Sepatu', 'Buku', 'Penggaris'];
+  List<int> hargaBarang = [700000, 30000, 5000];
+  int total = totalHarga(hargaBarang);
+  double diskon = 0;
+  if (isMember) {
+    diskon = total * 10 / 100;
+  }
+  double pajak = hitungTotalPajak(total - diskon);
+  double bayar = total - diskon + pajak;
+  int uangBayar = 2000000;
+  double kembalian = uangBayar - bayar;
+
+  String level;
+  switch (total) {
+    case >= 200000:
+      level = 'Gold';
+      break;
+    case >= 100000:
+      level = 'Silver';
+      break;
+    default:
+      level = 'Reguler';
+  }
+
+  print('=== $namaToko ===');
+  print('Pelanggan : $namaPelanggan');
+  for (int i = 0; i < namaBarang.length; i++) {
+    print('${i + 1}. ${namaBarang[i]}  Rp ${hargaBarang[i]}');
+  }
+  print('Total     : Rp $total');
+  print('Diskon    : Rp $diskon');
+  print('Pajak     : Rp $pajak');
+  print('Bayar     : Rp $bayar');
+  print('Voucher   : ${kodeVoucher ?? 'Tidak ada voucher'}');
+  print('Level     : $level');
+  print('Kembalian : Rp $kembalian');
+}
+
+int totalHarga(List<int> hargaBarang) {
+  int total = 0;
+  for (int harga in hargaBarang) {
+    total += harga;
+  }
+  return total;
+}
+double hitungTotalPajak(double total) => total * 10 / 100;
